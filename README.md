@@ -1,5 +1,12 @@
 # Docker Image: Python Development Environment (Ubuntu 22.04 - Jammy)
 
+<p>
+<a href="https://github.com/ivasik-k7/ubuntu-python-poetry/actions/workflows/docker.yaml"><img src="https://github.com/ivasik-k7/ubuntu-python-poetry/actions/workflows/docker.yaml/badge.svg" /></a>
+<a href="https://hub.docker.com/r/ikovtun7/ubuntu-python-poetry">
+<img src="https://badgen.net/docker/pulls/ikovtun7/ubuntu-python-poetry?icon=docker&label=pulls" alt="Docker Pulls" /></a>
+<a href="https://hub.docker.com/r/ikovtun7/ubuntu-python-poetry"><img src="https://badgen.net/docker/size/ikovtun7/ubuntu-python-poetry?icon=docker&label=image%20size" alt="Docker Image Size" /></a>
+</p>
+
 This Docker image provides a Python development environment based on Ubuntu 22.04 (Jammy), with Python 3.11 installed from the deadsnakes PPA. It includes essential development tools and sets up pip and Poetry for managing Python packages.
 
 ## Features
