@@ -23,6 +23,7 @@ This Docker image provides a Python development environment based on Ubuntu 22.0
   - ca-certificates
   - vim
   - sudo
+  - gnupg
   - make
   - tree
   - wget
