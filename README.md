@@ -35,6 +35,7 @@ This Docker image provides a Python development environment based on Ubuntu 22.0
   - python3.11
   - python3.11-venv
   - python3.11-dev
+- **Docker**
 
 ## Notes
 

@@ -1,4 +1,5 @@
 FROM ubuntu:jammy
+LABEL maintainer="Ivan Kovtun"
 
 ENV USER=developer
 ENV GROUP=developers
@@ -20,8 +21,8 @@ ENV PATH $PYTHON_ROOT/bin:${HOME}/.local/bin:${PATH}
 ENV POETRY_HOME ${HOME}/.local/share/pypoetry
 
 # Localization and timezone
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-811
+ARG LANG="en_US.UTF-8"
+ARG LC_ALL="en_US.UTF-8"
 ENV TZ=Europe/London
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -49,9 +50,15 @@ RUN apt install -y --no-install-recommends \
     ## Symbolic Link related
     ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
 
+# Install Docker
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+    apt-cache policy docker-ce && \
+    apt install -y --no-install-recommends docker-ce
+
 # Installing Python Related Managers
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
-RUN pip install poetry
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3 && \
+    pip install poetry
 
 # Configure sudoers for the developer user
 RUN echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers   
