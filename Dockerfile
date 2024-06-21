@@ -1,13 +1,15 @@
 FROM ubuntu:jammy
 
+ENV USER=developer
+ENV GROUP=developers
+ENV UID=1001 
+
 ENV HOME /home/developer
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Create the developer group and user before switching to the developer user
-RUN groupadd -r developers && \
-    useradd -m -r -g developers developer
+RUN groupadd -r ${GROUP} && \
+    useradd -m -s /bin/bash -u $UID -r -g ${GROUP} ${USER}
 
-# Set up the working directory
 WORKDIR $HOME
 
 ARG PYTHON_VERSION=3.11
@@ -54,11 +56,10 @@ RUN pip install poetry
 # Configure sudoers for the developer user
 RUN echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers   
 
-# Change ownership of the home directory to the developer user
-RUN chown -R developer:developers $HOME
+# Change ownership with permissions of the home directory to the developer user
+RUN chown -R $USER:$GROUP $HOME && \
+    chmod -R u+rwx $HOME
 
-USER developer
-
-
+USER ${USER}
 
 CMD [ "/bin/bash" ]
